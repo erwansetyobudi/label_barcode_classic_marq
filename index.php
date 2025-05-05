@@ -253,14 +253,33 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
   $html_str .= '.callNum{ font-size:'.$sysconf[$plugin_name]['callnumber_font_size'].'pt; text-align: center;  position: relative;  top: -'.$tinggi.'mm;  padding-top: 0px;}'."\n";
   $html_str .= '.cc{  height: '.$barcode.'mm;  width:  '.$tinggi.'mm;  -ms-transform: rotate(90deg);  -webkit-transform: rotate(90deg);transform: rotate(90deg); position: absolute; margin-top: '.str_replace(',', '.', (($tinggi-$barcode)/2)).'mm;margin-left: -'.str_replace(',', '.', (($tinggi-$barcode)/2)).'mm;}'."\n";
   $html_str .= '.cw{  width:  '.$tinggi.'mm;  height:  '.$barcode.'mm;  -ms-transform: rotate(-90deg);  -webkit-transform: rotate(-90deg); transform: rotate(-90deg); position: absolute; margin-top: '.str_replace(',', '.', (($tinggi-$barcode)/2)).'mm; margin-left: -'.str_replace(',', '.', (($tinggi-$barcode)/2)).'mm;}'."\n";
-  $html_str .= '.right > .barcode{  margin-left: '.($lebar-$barcode).'mm;  border-left: solid '.$border.'px '.$sysconf[$plugin_name]['barcode_border_color'].';}'."\n";
+  $html_str .= '.right > .barcode{  
+  width: '.$barcode.'mm;
+  margin-left: '.($lebar-$barcode).'mm; 
+  border-left: solid '.$border.'px '.$sysconf[$plugin_name]['barcode_border_color'].';}';
+
   $html_str .= '.right > .header{  margin-left: 0px;  width: '.($lebar-$barcode).'mm;}'."\n";
 
   $margin_r = $sysconf[$plugin_name]['callnumber_align']=='left'?$sysconf[$plugin_name]['callnumber_padding_size']:($sysconf[$plugin_name]['callnumber_align']=='right'?('-'.$sysconf[$plugin_name]['callnumber_padding_size']):'0');
 
-  $html_str .= '.right > .callNum{  text-align:'.$sysconf[$plugin_name]['callnumber_align'].';margin-left: '.$margin_r.'mm;  width:  '.($lebar-$barcode).'mm;}'."\n";
-  $html_str .= '.left > .barcode{  margin-left: 0px;  border-right: solid '.$border.'px '.$sysconf[$plugin_name]['barcode_border_color'].';}'."\n";
-  $html_str .= '.left > .header{  margin-left: '.$barcode.'mm;  width: '.($lebar-$barcode).'mm;}'."\n";
+  $html_str .= '.right > .callNum{  
+  text-align:'.$sysconf[$plugin_name]['callnumber_align'].'; 
+  margin-left: '.$margin_r.'mm;  
+  width: 65%;
+}'."\n";
+
+  // Set sisi kiri (call number) 65% dan sisi kanan (barcode) 35%
+  $left_percent = 65;
+  $right_percent = 35;
+
+  // Ubah menjadi proporsional
+  $html_str .= '.left > .header{ width: '.round($lebar * $left_percent / 100, 2).'mm; margin-left: '.round($lebar * $right_percent / 100, 2).'mm;}';
+  $html_str .= '.left > .callNum{ width: '.round($lebar * $left_percent / 100, 2).'mm; }';
+  $html_str .= '.right > .header{ width: '.round($lebar * $left_percent / 100, 2).'mm; }';
+  $html_str .= '.right > .barcode{ width: '.round($lebar * $right_percent / 100, 2).'mm; margin-left: '.round($lebar * $left_percent / 100, 2).'mm; }';
+  $html_str .= '.img_code{ width: 90%; height:auto; margin:0 auto; padding:0; display:block;}'."\n";
+
+
 
   $margin_l = $sysconf[$plugin_name]['callnumber_align']=='left'?($barcode+$sysconf[$plugin_name]['callnumber_padding_size']):($sysconf[$plugin_name]['callnumber_align']=='right'?($barcode-$sysconf[$plugin_name]['callnumber_padding_size']):$barcode);
 
@@ -343,13 +362,8 @@ $baris_warna = 5;  // baris warna (baris 2–6)
 $baris_height = floor(($tinggi - $tinggi_judul - 0.5) / $baris_warna * 100) / 100;
 
 
-$html_str .= '<div class="callNum" style="
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    height: '.($tinggi - 15).'mm;
-    overflow: hidden;
-">';
+$html_str .= '<div class="callNum" style="display: flex; flex-direction: column; height: '.($tinggi - 15).'mm; overflow: hidden;">';
+
 
 
 // PEMISAHAN KLASIFIKASI NUMERIK DIMULAI DARI LINE 1 (tanpa header call number lengkap)
@@ -381,6 +395,8 @@ $color_map = [
 ];
 
 // Cetak baris 2–6
+$baris_height = round(($tinggi - 15) / 5, 2); // bagi rata tinggi 5 baris
+
 foreach ($lines as $line) {
     $first_digit = substr($line, 0, 1);
     $baris_color = isset($color_map[$first_digit]) ? $color_map[$first_digit] : '#FFFFFF';
@@ -388,13 +404,12 @@ foreach ($lines as $line) {
         background-color: '.$baris_color.';
         color: white;
         font-weight: bold;
-        flex-grow: 1;
-        line-height: 1.2;
+        height: '.$baris_height.'mm;
+        line-height: '.$baris_height.'mm;
         margin: 0;
         padding: 0;
-        overflow: hidden;
-        -webkit-text-stroke: 0.5px black;
         text-align: center;
+        -webkit-text-stroke: 0.5px black;
     ">' . htmlspecialchars($line) . '</div>';
 }
 
