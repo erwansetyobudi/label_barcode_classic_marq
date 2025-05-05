@@ -73,7 +73,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'label' => __('Box Width').' <small><i>(mm)</i></small>',
         'type' => 'text',
         'width' => '15',
-        'default' => $sysconf[$plugin_name]['barcode_box_width']??'100'
+        'default' => $sysconf[$plugin_name]['barcode_box_width']??'130'
     ],
     'barcode_border_size' => [
         'dbfield' => 'barcode_border_size',
