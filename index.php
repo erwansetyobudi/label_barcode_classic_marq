@@ -364,8 +364,6 @@ $baris_height = floor(($tinggi - $tinggi_judul - 0.5) / $baris_warna * 100) / 10
 
 $html_str .= '<div class="callNum" style="display: flex; flex-direction: column; height: '.($tinggi - 15).'mm; overflow: hidden;">';
 
-
-
 // PEMISAHAN KLASIFIKASI NUMERIK DIMULAI DARI LINE 1 (tanpa header call number lengkap)
 $tokens = explode(' ', $callnumb, 2);
 $classification = $tokens[0]; // Misalnya: 813.456
@@ -377,8 +375,6 @@ $line4 = substr($classification, 4, 1);                 // digit pertama setelah
 $line5 = substr($classification, 5);                    // sisanya setelah titik
 
 $lines = [$line1, $line2, $line3, $line4, $line5];
-
-
 
 // Peta warna berdasarkan digit pertama
 $color_map = [
