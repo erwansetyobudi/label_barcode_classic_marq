@@ -240,7 +240,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
    
   // create html ouput
   $html_str  = '<!DOCTYPE html>'."\n";
-  $html_str .= '<html><head><title>Classic Label & Barcode Print Result</title>'."\n";
+  $html_str .= '<html><head><title>Fiction Label Printing</title>'."\n";
   $html_str .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
   $html_str .= '<meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, post-check=0, pre-check=0" /><meta http-equiv="Expires" content="Sat, 26 Jul 1997 05:00:00 GMT" />';
   $html_str .= '<script type="text/javascript" src="../plugins/label_barcode_classic_marq/src/JsBarcode.all.min.js"></script>';
@@ -536,7 +536,7 @@ $html_str .= '</div>'."\n";
 <fieldset class="menuBox">
 <div class="menuBoxInner printIcon">
   <div class="per_title">
-      <h2><?= __('Classic Label & Barcode Printing'); ?></h2>
+      <h2><?= __('Fiction Label Printing'); ?></h2>
   </div>
   <div class="sub_section">
       <div class="btn-group">
