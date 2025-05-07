@@ -61,9 +61,8 @@ Berikut adalah daftar warna yang digunakan dalam sistem Color Marq untuk visuali
 Nikmati kemudahan dalam mengelola koleksi perpustakaan Anda dengan **Label Barcode Marq** dan rasakan manfaatnya!
 
 ## Preview
+![image](https://github.com/user-attachments/assets/9f3cd03b-2001-4ba0-8336-e11170e0262a)
 
-![image](https://github.com/user-attachments/assets/bcfdddbd-a376-45a3-b8fa-22dd7f7a6445)
-
-
+![image](https://github.com/user-attachments/assets/67ae5a30-3a40-4f79-ba38-eccf5576820d)
 
 
