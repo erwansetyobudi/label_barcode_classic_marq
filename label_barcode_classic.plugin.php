@@ -13,3 +13,4 @@ $plugin = \SLiMS\Plugins::getInstance();
 
 // registering menus
 $plugin->registerMenu('bibliography', 'Classic Label & Barcode Marq', __DIR__ . '/index.php');
+$plugin->registerMenu('bibliography', 'Fiction Label', __DIR__ . '/fiction_label.php');
