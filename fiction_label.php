@@ -564,7 +564,18 @@ $html_str .= '</div>'."\n";
 /* search form end */
 
 // create datagrid
+// create datagrid
 $datagrid = new simbio_datagrid();
+
+// Tambahkan kriteria filter untuk call number
+$callnumber_criteria = "(IF(item.call_number!='NULL',item.call_number,index.call_number) REGEXP '^(FIC|[^0-9])')";
+
+// Jika sudah ada kriteria pencarian, gabungkan dengan AND
+if (isset($criteria)) {
+    $datagrid->setSQLcriteria('('.$criteria['sql_criteria'].') AND '.$callnumber_criteria);
+} else {
+    $datagrid->setSQLcriteria($callnumber_criteria);
+}
 /* ITEM LIST */
 require SIMBIO.'simbio_UTILS/simbio_tokenizecql.inc.php';
 require LIB.'biblio_list_model.inc.php';
